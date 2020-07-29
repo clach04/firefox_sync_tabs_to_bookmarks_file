@@ -31,3 +31,4 @@ Check out:
   * https://github.com/mozilla-services/syncclient/issues/28 - avoid "New sign-in to Firefox" email confirmation/warning
   * https://github.com/eNote-GmbH/syncclient - NOTE not been able to successfully use this to export data, unclear on usage (missing docs)
     error `fxa.errors.ClientError: The request was blocked for security reasons`
+    https://github.com/eNote-GmbH/syncclient/pull/2
