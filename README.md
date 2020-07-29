@@ -21,3 +21,13 @@ For example:
   * Shiori
   * Wallabag
   * Firefox
+
+
+NOTE firefox_syncclient is likely not an ideal tool/version.
+
+Check out:
+
+  * https://github.com/nafonels/syncclient/compare/master...tcr:master  -- not sure why json load is done in put_record()
+  * https://github.com/mozilla-services/syncclient/issues/28 - avoid "New sign-in to Firefox" email confirmation/warning
+  * https://github.com/eNote-GmbH/syncclient - NOTE not been able to successfully use this to export data, unclear on usage (missing docs)
+    error `fxa.errors.ClientError: The request was blocked for security reasons`
