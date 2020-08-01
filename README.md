@@ -14,6 +14,7 @@ Sample:
     # firefox_sync_tabs_to_bookmarks_file
     python3 dump_tabs_bookmark.py export.json  # list clients
     python3 dump_tabs_bookmark.py export.json "client name"  # dump bookmarks
+    python3 dump_tabs_bookmark.py export.json -a  # dump bookmarks of tabs for all devices - NOTE export format untested with other tools
 
 Bookmark file is in NETSCAPE Bookmark file format. Suitable for import into most tools.
 For example:
@@ -21,6 +22,11 @@ For example:
   * Shiori
   * Wallabag
   * Firefox
+
+Running notes:
+
+  * if tab history is present script will stop, first entry in history can be used and the rest dropped if environment variable `IGNORE_HISTORY` is set
+  * Recommend using Python3 and under Microsoft Windows setting `set PYTHONIOENCODING=utf8` to ensure stdout redirect to file works correctly
 
 
 NOTE firefox_syncclient is likely not an ideal tool/version.

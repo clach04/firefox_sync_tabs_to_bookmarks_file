@@ -106,6 +106,10 @@ def main(argv=None):
         client_name = None
     ignore_history = os.environ.get('IGNORE_HISTORY', False)
     #ignore_history = True
+    if client_name == '-a':
+        dump_all = True
+    else:
+        dump_all = False
 
     log.info('filename %r', filename)
     f = open(filename, 'rb')
@@ -130,8 +134,13 @@ def main(argv=None):
     print(pretty_json)
     log.debug('dump complete')
     """
-    netscape_bookmark_file_template = """<!DOCTYPE NETSCAPE-Bookmark-file-1><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"><TITLE>Bookmarks</TITLE><H1>Bookmarks</H1><DL>
-<DT><A HREF="https://github.com/go-shiori/shiori/wiki/Usage" >go-shiori/shiori</A>
+    netscape_bookmark_file_template = """<!DOCTYPE NETSCAPE-Bookmark-file-1><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+    <TITLE>Bookmarks</TITLE>
+    <H1>Bookmarks</H1>
+<DL>
+    <DT><H3>Optional Folder Name</H3><DL>
+        <DT><A HREF="https://github.com/go-shiori/shiori/wiki/Usage" >go-shiori/shiori</A>
+    </DL><!-- optional, only if H3 folder name was used -->
 </DL>
 """  # FIXME actual use a template
     if client_name:
@@ -139,7 +148,9 @@ def main(argv=None):
 
     for device in tmp_data:
         if client_name:
-            if client_name == device["payload"]["clientName"]:
+            if dump_all:
+                print('<DT><H3>%s</H3><DL>' % device["payload"]["clientName"])
+            if dump_all or client_name == device["payload"]["clientName"]:
                 for tab in device["payload"]["tabs"]:
                     #print(repr(tab["title"]))
                     #print(len(tab["urlHistory"]))
@@ -152,6 +163,8 @@ def main(argv=None):
                     url = tab["urlHistory"][0]
                     title = tab["title"]
                     print('''<DT><A HREF="%s" >%s</A>''' % (url, escape(title)))
+            if dump_all:
+                print('</DL>')
         else:
             print(device["payload"]["clientName"])
 
