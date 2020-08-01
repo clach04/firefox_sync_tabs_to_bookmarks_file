@@ -33,6 +33,7 @@ try:
     from html import escape
 except ImportError:
     from cgi import escape
+import os
 import sys
 import warnings
 import logging
@@ -103,7 +104,7 @@ def main(argv=None):
         client_name = argv[2]
     except IndexError:
         client_name = None
-    ignore_history = False
+    ignore_history = os.environ.get('IGNORE_HISTORY', False)
     #ignore_history = True
 
     log.info('filename %r', filename)
