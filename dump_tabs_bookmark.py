@@ -135,7 +135,7 @@ def main(argv=None):
 
     for device in tmp_data:
         if client_name:
-            if 'Section9 SM-G960U1' == device["payload"]["clientName"]:
+            if client_name == device["payload"]["clientName"]:
                 for tab in device["payload"]["tabs"]:
                     #print(repr(tab["title"]))
                     #print(len(tab["urlHistory"]))
