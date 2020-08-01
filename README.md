@@ -12,8 +12,8 @@ Sample:
     python syncclient/main.py alexis@notmyidea.org $PASSWORD get_records tabs > export.json
 
     # firefox_sync_tabs_to_bookmarks_file
-    python3 dump_tabs_bookmark.py export.json  # list clients
-    python3 dump_tabs_bookmark.py export.json "client name"  # dump bookmarks
+    python3 dump_tabs_bookmark.py export.json  # list client names
+    python3 dump_tabs_bookmark.py export.json "client name"  # dump bookmarks for device called "client name"
     python3 dump_tabs_bookmark.py export.json -a  # dump bookmarks of tabs for all devices - NOTE export format untested with other tools
 
 Bookmark file is in NETSCAPE Bookmark file format. Suitable for import into most tools.
