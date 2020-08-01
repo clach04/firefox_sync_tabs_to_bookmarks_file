@@ -103,6 +103,9 @@ def main(argv=None):
         client_name = argv[2]
     except IndexError:
         client_name = None
+    ignore_history = False
+    #ignore_history = True
+
     log.info('filename %r', filename)
     f = open(filename, 'rb')
     data = f.read()
@@ -139,7 +142,7 @@ def main(argv=None):
                 for tab in device["payload"]["tabs"]:
                     #print(repr(tab["title"]))
                     #print(len(tab["urlHistory"]))
-                    if len(tab["urlHistory"]) != 1:
+                    if len(tab["urlHistory"]) != 1 and not ignore_history:
                         print('************')
                         print(repr(tab["title"]))
                         print(len(tab["urlHistory"]))
