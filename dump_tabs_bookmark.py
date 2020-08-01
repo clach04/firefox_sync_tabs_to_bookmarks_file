@@ -144,7 +144,7 @@ def main(argv=None):
                         print(repr(tab["title"]))
                         print(len(tab["urlHistory"]))
                         print(tab["urlHistory"])
-                        raise NotImplemented('lengths != 1 (%r)' % len(tab["urlHistory"]))
+                        raise NotImplementedError('lengths != 1 (%r)' % len(tab["urlHistory"]))
                     url = tab["urlHistory"][0]
                     title = tab["title"]
                     print('''<DT><A HREF="%s" >%s</A>''' % (url, escape(title)))
