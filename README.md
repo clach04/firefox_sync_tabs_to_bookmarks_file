@@ -4,12 +4,14 @@ Export tabs from Firefox Sync into bookmarks file
 
 Latest version available from https://github.com/clach04/firefox_sync_tabs_to_bookmarks_file
 
-Export tabs from Firefox sync using https://github.com/clach04/firefox_syncclient
+Export tabs from Firefox sync using https://github.com/clach04/firefox_syncclient or https://github.com/eNote-GmbH/syncclient
+
+Works with Python 3.x or 2.7.
 
 Sample:
 
     # firefox_syncclient
-    python syncclient/main.py alexis@notmyidea.org $PASSWORD get_records tabs > export.json
+    python syncclient/main.py alexis@notmyidea.org $PASSWORD get_records tabs > export.json  # from https://github.com/clach04/firefox_syncclient
 
     # firefox_sync_tabs_to_bookmarks_file
     python3 dump_tabs_bookmark.py export.json  # list client names
