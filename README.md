@@ -4,14 +4,28 @@ Export tabs from Firefox Sync into bookmarks file
 
 Latest version available from https://github.com/clach04/firefox_sync_tabs_to_bookmarks_file
 
-Export tabs from Firefox sync using https://github.com/clach04/firefox_syncclient or https://github.com/eNote-GmbH/syncclient
+Export tabs from Firefox sync using https://github.com/eNote-GmbH/syncclient (https://github.com/clach04/firefox_syncclient - enote_docs branch)
 
 Works with Python 3.x or 2.7.
+
+
+## Setup
+
+Issue:
+
+    #pip install git+https://github.com/eNote-GmbH/syncclient.git  # does NOT work after install as of 2022-05-21 due to path issues
+    git clone https://github.com/eNote-GmbH/syncclient
+    cd firefox_syncclient
+    pip install -e .
+    python syncclient/main.py --help
+
+## Usage
 
 Sample:
 
     # firefox_syncclient
-    python syncclient/main.py alexis@notmyidea.org $PASSWORD get_records tabs > export.json  # from https://github.com/clach04/firefox_syncclient
+    fxa-client -v -u me@example.com --account-server https://api.accounts.firefox.com/v1 --oauth-server https://oauth.accounts.firefox.com/v1 --bearer
+    python syncclient/main.py -u me@example.com --client-id $CLIENT_ID --decrypt get_records tabs > export.json  # from https://github.com/eNote-GmbH/syncclient
 
     # firefox_sync_tabs_to_bookmarks_file
     python3 dump_tabs_bookmark.py export.json  # list client names
