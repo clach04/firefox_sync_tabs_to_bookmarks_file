@@ -94,6 +94,14 @@ else:
       * http://deron.meranda.us/python/comparing_json_modules/
 """
 
+try:
+    basestring
+except NameError:
+    try:
+        basestring = (str, unicode)
+    except NameError:
+        basestring = str
+
 
 def main(argv=None):
     if argv is None:
@@ -147,11 +155,15 @@ def main(argv=None):
         print('''<!DOCTYPE NETSCAPE-Bookmark-file-1><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"><TITLE>Bookmarks</TITLE><H1>Bookmarks</H1><DL>''')
 
     for device in tmp_data:
+        payload = device["payload"]
+        if isinstance(payload, basestring):
+            # not using my oldfork, so need to convert to json
+            payload = load_json(payload)
         if client_name:
             if dump_all:
-                print('<DT><H3>%s</H3><DL>' % device["payload"]["clientName"])
-            if dump_all or client_name == device["payload"]["clientName"]:
-                for tab in device["payload"]["tabs"]:
+                print('<DT><H3>%s</H3><DL>' % payload["clientName"])
+            if dump_all or client_name == payload["clientName"]:
+                for tab in payload["tabs"]:
                     #print(repr(tab["title"]))
                     #print(len(tab["urlHistory"]))
                     if len(tab["urlHistory"]) != 1 and not ignore_history:
@@ -166,7 +178,7 @@ def main(argv=None):
             if dump_all:
                 print('</DL>')
         else:
-            print(device["payload"]["clientName"])
+            print(payload["clientName"])
 
     if client_name:
         print('''</DL>''')
