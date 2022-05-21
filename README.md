@@ -28,6 +28,9 @@ Sample:
     python syncclient/main.py -u me@example.com --client-id $CLIENT_ID --decrypt get_records tabs > export.json  # from https://github.com/eNote-GmbH/syncclient
 
     # firefox_sync_tabs_to_bookmarks_file
+    set PYTHONIOENCODING=utf8
+    export PYTHONIOENCODING=utf8
+
     python3 dump_tabs_bookmark.py export.json  # list client names
     python3 dump_tabs_bookmark.py export.json "client name"  # dump bookmarks for device called "client name"
     python3 dump_tabs_bookmark.py export.json -a  # dump bookmarks of tabs for all devices - NOTE export format untested with other tools
