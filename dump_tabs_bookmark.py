@@ -154,14 +154,33 @@ def main(argv=None):
     if client_name:
         print('''<!DOCTYPE NETSCAPE-Bookmark-file-1><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"><TITLE>Bookmarks</TITLE><H1>Bookmarks</H1><DL>''')
 
-    for device in tmp_data:
+    if dump_all:
+        # dump toc
+        """
+<ul>
+<li class="has-line-data" data-line-start="3" data-line-end="4"><a href="#bar">Bar</a></li>
+<li class="has-line-data" data-line-start="4" data-line-end="5"><a href="#foobar">Foobar</a></li>
+</ul>
+
+        """
+        print('<ul>')
+        for device_counter, device in enumerate(tmp_data):
+            payload = device["payload"]
+            if isinstance(payload, basestring):
+                # not using my oldfork, so need to convert to json
+                payload = load_json(payload)
+            print('<li><a href="#%d">%s</a></li>' % (device_counter, escape(payload["clientName"])))  # TODO set href based on name
+        print('</ul>')
+        print('')
+
+    for device_counter, device in enumerate(tmp_data):
         payload = device["payload"]
         if isinstance(payload, basestring):
             # not using my oldfork, so need to convert to json
             payload = load_json(payload)
         if client_name:
             if dump_all:
-                print('<DT><H3>%s</H3><DL>' % payload["clientName"])
+                print('<DT><H3><a id="%d"></a>%s</H3><DL>' % (device_counter, escape(payload["clientName"])))  # TODO set href based on name
             if dump_all or client_name == payload["clientName"]:
                 for tab in payload["tabs"]:
                     #print(repr(tab["title"]))
