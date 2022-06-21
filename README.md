@@ -16,6 +16,7 @@ Issue:
     #pip install git+https://github.com/eNote-GmbH/syncclient.git  # does NOT work after install as of 2022-05-21 due to path issues
     git clone https://github.com/eNote-GmbH/syncclient
     cd firefox_syncclient
+    # ensure fxa-client is available
     pip install -e .
     python syncclient/main.py --help
 
@@ -25,12 +26,15 @@ Sample:
 
     # firefox_syncclient
     fxa-client -v -u me@example.com --account-server https://api.accounts.firefox.com/v1 --oauth-server https://oauth.accounts.firefox.com/v1 --bearer
+    # make a note of Client ID from fxa-client, store as CLIENT_ID
     python syncclient/main.py -u me@example.com --client-id $CLIENT_ID --decrypt get_records tabs > export.json  # from https://github.com/eNote-GmbH/syncclient
+    # NOTE see https://github.com/eNote-GmbH/syncclient/pull/2 - readme at headrevs of 2022-06-20 is missing key parameters!
 
     # firefox_sync_tabs_to_bookmarks_file
     set PYTHONIOENCODING=utf8
     export PYTHONIOENCODING=utf8
 
+    # optionally set OS environment variable IGNORE_HISTORY=true
     python3 dump_tabs_bookmark.py export.json  # list client names
     python3 dump_tabs_bookmark.py export.json "client name"  # dump bookmarks for device called "client name"
     python3 dump_tabs_bookmark.py export.json -a  # dump bookmarks of tabs for all devices - NOTE export format untested with other tools
